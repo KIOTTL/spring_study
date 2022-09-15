@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="dao" class="com.sist.web.EmpDAO" 
+	  c:driver="oracle.jdbc.driver.OracleDriver"
+	  p:url="jdbc:oracle:thin:@183.98.140.90:1521:XE"
+	  p:password="happy"
+	  p:username="hr"
+	/>
+	<!-- 값 = 생성자(매개변수) c태그 / setXxx() p태그 -->
+	
+	<!-- <bean id="dao1" class="com.sist.web.EmpDAO">
+	  <constructor-arg><value>oracle.jdbc.driver.OracleDriver</value></constructor-arg>
+	  <property name="url" value="jdbc:oracle:thin:@183.98.140.90:1521:XE"/>
+	</bean> -->
+	
+</beans>
