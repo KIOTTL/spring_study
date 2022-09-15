@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	
+	<!-- 
+		WebSocket
+		Security
+		
+		1) Spring Basic
+			= Container (클래스 관리)
+					BeanFactory
+						| (xml버전)					(자바 버전)
+					ApplicationContext = AnnotationConfigApplicationContext
+						|
+					WebApplicationContext = AnnotationConfigWebApplicationContext
+					==> DL / DI (클래스 찾기, 객체 생성시 필요한 데이터 주입)
+					==> 클래스와 클래스의 연관관계 설정 (DI)
+			= DI
+				작은 개념 : 객체 생성시 필요한 데이터 주입, 클래스 객체 주소 주입
+				         =====================
+				         setter DI, 생성자 DI(매개변수)
+				 큰 개념 : 클래스와 클래스의 연관 관계 설정
+			= AOP
+				중복된 소스를 모아서 필요한 위치에서 호출이 가능하게 만든다 (공통 모듈)
+				OOP를 보완한 개념 (자동)
+					Aspect
+					JoinPoint : 호출 시점 지정
+								Before, After, AfterThrowing, AfterReturning, Around, 메서드 대상으로
+								public void display() {
+									@Before
+									try {
+										Around
+										==========
+										
+										==========
+										Around								
+									} catch(Exception ex) {
+										AfterThrowing
+									} finally {
+										After
+									}
+									
+									return ""; ==> AfterReturning
+								} 
+					PointCut : AOP 대상의 메서드
+					Weaving : 메서드 + AOP
+					Advice : JoinPoint + PointCut
+					============================== Advice 여러 개를 모아서 Aspect
+					=> 트랜잭션, log 파일, Security (인가, 인증, 권한 부여)
+					=> 모든 page에 동일하게 적용되는 데이터, 빅데이터 (데이터 수집, 분석)
+			= MVC 
+				Model : 요청 처리 ==> 요청에 따라서 데이터베이스 연결 => 결과값을 request, session에 담아둔다
+						request 대신 전송객체 : Model, RedirectAttributes
+						=> 스프링에서는 @Controller
+						=> 요청 구분
+						 	@RequestMapping, @GetMapping, @PostMapping => Annotation (구분자)
+				View : Model에서 보내준 데이터 출력 = 브라우저 (html, jsp)
+				Controller : Front Controller (DispatcherServlet)
+							 요청 받아서 Model 호출 => JSP로 데이터 전송
+			= ORM : 데이터베이스 관련 라이브러리
+					MyBatis, Hibernate(JPA)
+					
+		MVC 동작 구조
+			사용자 요청 (JSP) ========== DispatcherServlet	============ 요청에 따라 Model 호출
+																			| HandlerMapping
+																기능별 구분 @RequestMapping, @GetMapping, @PostMapping
+														<============ request, model, session 결과값 받기
+													| ViewResolver : JSP 찾아서 request 전송
+												   JSP
+												   === 받은 데이터 출력 (JSTL, EL)	
+			<a><form> => .do			
+		================= WebSocket / Security / Task
+	 -->
+	
+	<servlet>
+		<servlet-name>appServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/config/application-*.xml</param-value>
+		</init-param>
+	</servlet>
+		
+	<servlet-mapping>
+		<servlet-name>appServlet</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+	<!-- 
+		@WebServlet("*.do")
+	 -->
+	<!-- 
+		request/response 미사용 = 한글 변환 
+		request.setCharacterEncoding("UTF-8")을 대신하는 코드
+	 -->
+	<filter>
+	   <filter-name>encodingFilter</filter-name>
+	   <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+	   <init-param>
+	     <param-name>encoding</param-name>
+	     <param-value>UTF-8</param-value>
+	   </init-param>
+	</filter>
+	
+	<filter-mapping>
+	  <filter-name>encodingFilter</filter-name>
+	  <url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+</web-app>
