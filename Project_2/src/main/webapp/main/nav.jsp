@@ -39,8 +39,8 @@ a:hover {
           <li style="font-size: 18px;"><a href="#">반려동물</a></li>
         </ul>
       </li>
-      <li style="margin-right: 40px;"><a href="#" style="color: black;">펀딩 예정</a></li>
-      <li style="margin-right: 40px;"><a href="#" style="color: black;">펀딩</a></li>
+      <li style="margin-right: 40px;"><a href="../funding/soon_list.do" style="color: black;">펀딩 예정</a></li>
+      <li style="margin-right: 40px;"><a href="../funding/list.do" style="color: black;">펀딩</a></li>
       <li style="margin-right: 40px;"><a href="#" style="color: black;">스토어</a></li>
     </ul>
     <form class="navbar-form" action="/action_page.php" style="text-align: right; margin-top: 40px; margin-right: 300px;">

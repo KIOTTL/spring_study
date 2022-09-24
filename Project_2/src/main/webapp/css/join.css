@@ -112,10 +112,10 @@ body {
     border: none;
     font-weight: 800;
     cursor: pointer;
-    background-image: url("../images/kakao.png");
+    background-image: url("../css/img/kakao.png");
     background-repeat: no-repeat;/*이미지 반복 없이 한 개만 출력*/
     background-size: 18px;
-    background-position: 155px 15.5px;/*영역 안에서 이미지 위치 x축 y축 위치값*/
+    background-position: 41px 17.5px;/*영역 안에서 이미지 위치 x축 y축 위치값*/
     padding-left: 1px;/*padding값이 없으면 placeholder="Add List"와 겹친다. */
 }
 
