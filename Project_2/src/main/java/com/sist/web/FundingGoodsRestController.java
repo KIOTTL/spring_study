@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sist.dao.FundingGoodsDAO;
+import com.sist.dao.MyPageDAO;
 import com.sist.vo.FundingGoodsVO;
 
 @RestController
@@ -120,6 +121,7 @@ public class FundingGoodsRestController {
 				k++;
 			}
 			result=arr.toJSONString();
+			System.out.println(result);
 		} catch(Exception ex) {}
 		
 		return result;

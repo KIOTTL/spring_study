@@ -88,6 +88,11 @@ function kakaoLogout() {
 						<input class="eye" type="password" style="width: 100%;"
 							placeholder="비밀번호 (영문, 숫자 조합 최소 8자)" name="pwd" v-model="pwd">
 					</div>
+					
+					<p>
+					  <input type=checkbox name="ck" v-model="ck" style="width: 13px; height: auto; margin: 5px;">
+					  <span style="padding: 5px; font-size: 13px;">아이디 저장</span>
+					</p>
 
 				</div>
 
@@ -95,7 +100,7 @@ function kakaoLogout() {
 					<span><input type="checkbox">로그인 상태 유지하기 </span> <span><a
 						href="">아이디/비밀먼호 찾기</a></span>
 				</div -->
-				<div style="height: 50px;"></div>
+				<div style="height: 30px;"></div>
 				<div>
 					<button class="join_submit" type="button" name="login" style="font-size: 14px;" v-on:click="login()">로그인</button>
 				</div>
@@ -116,7 +121,7 @@ function kakaoLogout() {
 				</div>
 				<div class="join_member">
 					<span>회원 혜택을 받아보세요.</span> <span><a
-						href="#">회원가입</a></span>
+						href="../user/join.do">회원가입</a></span>
 				</div>
 		</div>
 
@@ -127,7 +132,21 @@ function kakaoLogout() {
     	data:{
     		id:'',
     		pwd:'',
+    		ck:'',
     		result:{}
+    	},
+    	mounted:function(){
+    		let _this=this;
+    		axios.get("http://localhost:8080/web/user/login.do",{
+				params:{
+				}    			
+    		}).then(function(result){
+    			_this.id='${id}';
+    			if(_this.id!='') {
+    				_this.ck='true';
+    			}
+    		})
+    		
     	},
     	methods:{
     		login:function(){
@@ -139,11 +158,12 @@ function kakaoLogout() {
     				alert("비밀번호를 입력하세요");
     				return;
     			}
-    			
+				
     			axios.get("http://localhost:8080/web/user/login_ok.do",{
     				params:{
     					id:this.id,
-    					pwd:this.pwd
+    					pwd:this.pwd,
+    					ck:this.ck
     				}
     			}).then(result=>{
     				console.log(result.data);
@@ -158,6 +178,7 @@ function kakaoLogout() {
     				} else {
     					location.href="../main/main.do";
     				}
+    				console.log(ck);
     			})
     		}
     	}

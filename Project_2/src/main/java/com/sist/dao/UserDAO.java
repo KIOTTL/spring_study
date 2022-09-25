@@ -1,6 +1,7 @@
 package com.sist.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import com.sist.mapper.UserMapper;
@@ -11,6 +12,9 @@ public class UserDAO {
 	@Autowired
 	private UserMapper mapper;
 	
+	@Autowired
+	private BCryptPasswordEncoder encoder;
+	
 	public UserVO isLogin(String id, String pwd) {
 		UserVO vo=new UserVO();
 		int count=mapper.userIdCount(id);
@@ -18,7 +22,8 @@ public class UserDAO {
 			vo.setMsg("NOID");
 		} else {
 			UserVO dbVO=mapper.userInfoData(id);
-			if(pwd.equals(dbVO.getPwd())) {
+			if(encoder.matches(pwd, dbVO.getPwd())) {
+				vo.setUser_no(dbVO.getUser_no());
 				vo.setId(id);
 				vo.setAdmin(dbVO.getAdmin());
 				vo.setMsg("OK");
@@ -29,4 +34,24 @@ public class UserDAO {
 		
 		return vo;
 	}
+	
+	public int userIdCount(String id) {
+		return mapper.userIdCount(id);
+	}
+	
+	public UserVO userInfoData(String id) {
+		return mapper.userInfoData(id);
+	}
+	
+	public void userJoinInsert(UserVO vo) {
+		mapper.userJoinInsert(vo);
+	}
+	
+	public int userTelCount(String tel) {
+		return mapper.userTelCount(tel);
+	}
+	
+//	public void userUpdate(UserVO vo) {
+//		mapper.userUpdate(vo);
+//	}
 }

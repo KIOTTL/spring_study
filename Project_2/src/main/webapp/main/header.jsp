@@ -21,7 +21,7 @@
   <nav class="u-menu u-menu-one-level u-offcanvas u-menu-1" style="margin-right: 50px;">
     <div class="u-custom-menu u-nav-container">
       <ul class="u-nav u-unstyled u-nav-1">
-        <li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="#" style="padding: 10px 10px; font-weight: 700; font-size: 15px;">프로젝트 올리기</a></li>
+        <li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="../mypage/mypage.do" style="padding: 10px 10px; font-weight: 700; font-size: 15px;">프로젝트 올리기</a></li>
 	    <li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="#" style="padding: 10px 10px;"><img src="../css/img/heart.png" style="width: 20px; height: 23px;"></a></li>
 	    <c:if test="${sessionScope.id==null }">  
 	      <li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="../user/login.do" style="padding: 10px 10px; font-weight: 650; font-size: 15px;">Login</a></li>
@@ -36,7 +36,7 @@
         <div class="u-inner-container-layout u-sidenav-overflow">
           <div class="u-menu-close"></div>
           <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
-            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="#" >프로젝트 올리기</a></li>
+            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="../mypage/mypage.do" >프로젝트 올리기</a></li>
             <li class="u-nav-item"><a class="u-button-style u-nav-link" href="#"><img src="../css/img/heart.png" style="width: 20px; height: 23px;"></a></li>
 			<c:if test="${sessionScope.id==null }">
   			  <li class="u-nav-item"><a class="u-button-style u-nav-link" href="../user/login.do">Login</a></li>

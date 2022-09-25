@@ -24,5 +24,5 @@ import lombok.Setter;
 @Setter
 public class UserVO {
 	private int user_no;
-	private String id, pwd, admin, name, email, tel, bday, card_number, card_date, card_pwd, zipcode, addr, addr_detail, msg;
+	private String id, pwd, admin, name, email, tel, bday, card_number, card_date, card_pwd, zipcode, addr, addr_detail, bank_name, msg;
 }

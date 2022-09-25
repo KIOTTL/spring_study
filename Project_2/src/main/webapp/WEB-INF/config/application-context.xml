@@ -14,10 +14,17 @@
 	<aop:aspectj-autoproxy/>
 	
 	<!-- 사용자 정의 클래스 등록 -->
-	<context:component-scan base-package="com.sist.*"/> <!-- 선택적 메모리 할당 -->
+	<context:component-scan base-package="com.sist.*"/>
 	
 	<!-- MVC:한글 변환 -->
-	<mvc:annotation-driven/>	<!-- sendRedirect : 데이터 ?없이 전송 : RedirectAttributes -->
+	<mvc:annotation-driven/>	
+	
+	<mvc:interceptors>
+	  <mvc:interceptor>
+	    <mvc:mapping path="/user/login.do"/>
+	    <bean id="autoLoginInterceptor" class="com.sist.interceptor.AutoLoginInterceptor"/>
+	  </mvc:interceptor>
+	</mvc:interceptors>
 	
 	<!-- ViewResolver -->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"

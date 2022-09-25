@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -245,7 +244,7 @@ a.u-button-style:hover > .u-text-hover-palette-2-base, a.u-button-style:hover > 
 			      </div>
               </div>
             </div>
-            <div class="u-container-style u-tab-pane u-tab-pane-2" id="tab-db87" role="tabpanel" aria-labelledby="link-tab-db87">
+            <div class="u-container-style u-tab-pane u-tab-pane-2" id="tab-db87" role="tabpanel" aria-labelledby="link-tab-db87" v-on:click="fund()">
               <div class="u-container-layout u-container-layout-1">
 			      <div class="u-align-left u-clearfix u-sheet u-valign-middle u-sheet-1">
 			        <div class="u-expanded-width u-tabs u-tabs-1">
@@ -273,9 +272,9 @@ a.u-button-style:hover > .u-text-hover-palette-2-base, a.u-button-style:hover > 
 			                    </colgroup>
 			                    <tbody class="u-table-body">
 			                      <tr style="height: 25px;">
-			                        <td class="u-table-cell u-table-cell-1" style="font-weight: 700; font-size: 19px; padding: 20px;" colspan="2">올린 프로젝트 ({{count}})</td>
+			                        <td class="u-table-cell u-table-cell-1" style="font-weight: 700; font-size: 19px; padding: 20px;" colspan="2">올린 프로젝트 (1)</td>
 			                      </tr>
-			                      <tr style="height: 45px;" v-for="vo in project_list">
+			                      <tr style="height: 45px;" v-for="">
 			                        <td class="u-table-cell u-table-cell-3">
 			                          <div class="u-expanded-width u-table u-table-responsive u-table-2" style="border: 1px solid darkgray; border-radius: 5px;">
 						                  <table class="u-table-entity">
@@ -285,27 +284,18 @@ a.u-button-style:hover > .u-text-hover-palette-2-base, a.u-button-style:hover > 
 						                    </colgroup>
 						                    <tbody class="u-table-body">
 						                      <tr style="height: 84px;">
-						                        <td class="u-table-cell" rowspan="3">
-						                          <img :src="vo.img" style="width: 250px;">
-						                        </td>
-						                        <td class="u-table-cell u-table-cell-6" style="font-size: 18px; font-weight: 700;">{{vo.title}}</td>
+						                        <td class="u-table-cell" rowspan="3"></td>
+						                        <td class="u-table-cell u-table-cell-6" style="font-size: 18px; font-weight: 700;">No 밀가루! 초간편 한끼 &lt;떠먹는 영국식 미트파이&gt;</td>
 						                      </tr>
 						                      <tr style="height: 32px;">
-						                        <td class="u-table-cell u-table-valign-bottom u-table-cell-9" style="font-size: 14px; font-weight: 500; padding: 0px 10px;" :key="vo.goal_amount">{{vo.goal_amount | comma}}원 목표</td>
+						                        <td class="u-table-cell u-table-valign-bottom u-table-cell-9" style="font-size: 14px; font-weight: 500; padding: 0px 10px;">1,000,000원 목표</td>
 						                      </tr>
 						                      <tr style="height: 40px;">
-						                        <td class="u-table-cell u-table-valign-top u-table-cell-12" style="font-size: 14px; font-weight: 700; color: #db545a; padding-bottom: 20px;">{{vo.close_date}}까지 진행</td>
+						                        <td class="u-table-cell u-table-valign-top u-table-cell-12" style="font-size: 14px; font-weight: 700; color: #db545a; padding-bottom: 20px;">2022.09.22까지 진행</td>
 						                      </tr>
 						                    </tbody>
 						                  </table>
 						                </div>
-			                        </td>
-			                      </tr>
-			                      <tr colspan="2">
-			                        <td style="text-align: center;">
-				                        <button v-on:click="prev()">이전</button>
-										  {{curpage}} page / {{totalpage}} pages
-							            <button v-on:click="next()">다음</button>
 			                        </td>
 			                      </tr>
 			                    </tbody>
@@ -322,9 +312,9 @@ a.u-button-style:hover > .u-text-hover-palette-2-base, a.u-button-style:hover > 
 			                    </colgroup>
 			                    <tbody class="u-table-body">
 			                      <tr style="height: 25px;">
-			                        <td class="u-table-cell u-table-cell-14" style="font-weight: 700; font-size: 19px; padding: 20px;" colspan="2">후원 진행 중 ({{count}})</td>
+			                        <td class="u-table-cell u-table-cell-14" style="font-weight: 700; font-size: 19px; padding: 20px;" colspan="2">후원 진행 중 (1)</td>
 			                      </tr>
-			                      <tr style="height: 45px;" v-for="vo in paying_list">
+			                      <tr style="height: 45px;">
 			                        <td class="u-table-cell u-table-cell-16">
 			                          <div class="u-expanded-width u-table u-table-responsive u-table-5" style="border: 1px solid darkgray; border-radius: 5px;">
 						                  <table class="u-table-entity">
@@ -334,22 +324,20 @@ a.u-button-style:hover > .u-text-hover-palette-2-base, a.u-button-style:hover > 
 						                    </colgroup>
 						                    <tbody class="u-table-body">
 						                      <tr style="height: 29px;">
-						                        <td class="u-table-cell" rowspan="5">
-						                          <img :src="vo.img" style="width: 250px;">
-						                        </td>
-						                        <td class="u-table-cell u-table-valign-bottom u-table-cell-23" style="font-size: 14px; padding: 15px 10px 0px 10px;">후원일 [{{vo.rgdate}}]</td>
+						                        <td class="u-table-cell" rowspan="5"></td>
+						                        <td class="u-table-cell u-table-valign-bottom u-table-cell-23" style="font-size: 14px; padding: 15px 10px 0px 10px;">후원일 [2022.09.22]</td>
 						                      </tr>
 						                      <tr style="height: 26px;">
-						                        <td class="u-table-cell u-table-cell-25" style="font-size: 18px; font-weight: 700; padding-top: 5px;">{{vo.title}}</td>
+						                        <td class="u-table-cell u-table-cell-25" style="font-size: 18px; font-weight: 700; padding-top: 5px;">No 밀가루! 초간편 한끼 &lt;떠먹는 영국식 미트파이&gt;</td>
 						                      </tr>
 						                      <tr style="height: 28px;">
 						                        <td class="u-table-cell u-table-valign-top"><li>영국식 미트파이</li></td>
 						                      </tr>
 						                      <tr style="height: 27px;">
-						                        <td class="u-table-cell u-table-valign-bottom u-table-cell-29" style="font-size: 16px; font-weight: 500; padding: 0px 10px; font-weight: 700; color: gray;" :key="vo.ph_price">{{vo.ph_price | comma}}원 결제 예약</td>
+						                        <td class="u-table-cell u-table-valign-bottom u-table-cell-29" style="font-size: 16px; font-weight: 500; padding: 0px 10px; font-weight: 700; color: gray;">40,000원 결제 예약</td>
 						                      </tr>
 						                      <tr style="height: 25px;">
-						                        <td class="u-table-cell u-table-valign-top u-text-palette-2-base u-table-cell-31" style="font-size: 14px; font-weight: 700; color: #db545a; padding: 3px 10px 15px 10px;">결제 예정일 {{vo.expect_pay}}</td>
+						                        <td class="u-table-cell u-table-valign-top u-text-palette-2-base u-table-cell-31" style="font-size: 14px; font-weight: 700; color: #db545a; padding: 3px 10px 15px 10px;">결제 예정일 2022.10.30</td>
 						                      </tr>
 						                    </tbody>
 						                  </table>
@@ -366,9 +354,9 @@ a.u-button-style:hover > .u-text-hover-palette-2-base, a.u-button-style:hover > 
 			                    </colgroup>
 			                    <tbody class="u-table-body">
 			                      <tr style="height: 25px;">
-			                        <td class="u-table-cell u-table-cell-18" style="font-weight: 700; font-size: 19px; padding: 35px 20px 20px 20px;" colspan="2">후원 성공 ({{count}})</td>
+			                        <td class="u-table-cell u-table-cell-18" style="font-weight: 700; font-size: 19px; padding: 35px 20px 20px 20px;" colspan="2">후원 성공 (1)</td>
 			                      </tr>
-			                      <tr style="height: 45px;" v-for="vo in payingfin_list">
+			                      <tr style="height: 45px;">
 			                        <td class="u-table-cell u-table-cell-20">
 			                          <div class="u-expanded-width u-table u-table-responsive u-table-6" style="border: 1px solid darkgray; border-radius: 5px;">
 						                  <table class="u-table-entity">
@@ -378,22 +366,20 @@ a.u-button-style:hover > .u-text-hover-palette-2-base, a.u-button-style:hover > 
 						                    </colgroup>
 						                    <tbody class="u-table-body">
 						                      <tr style="height: 25px;">
-						                        <td class="u-table-cell" rowspan="5">
-						                          <img :src="vo.img" style="width: 250px;">
-						                        </td>
-						                        <td class="u-table-cell u-table-valign-bottom u-table-cell-33" style="font-size: 14px; padding: 15px 10px 0px 10px;">결제완료일 [{{vo.expect_pay}}]</td>
+						                        <td class="u-table-cell" rowspan="5"></td>
+						                        <td class="u-table-cell u-table-valign-bottom u-table-cell-33" style="font-size: 14px; padding: 15px 10px 0px 10px;">결제완료일 [2022.09.22]</td>
 						                      </tr>
 						                      <tr style="height: 26px;">
-						                        <td class="u-table-cell u-table-cell-35" style="font-size: 18px; font-weight: 700; padding-top: 5px;">{{vo.title}}</td>
+						                        <td class="u-table-cell u-table-cell-35" style="font-size: 18px; font-weight: 700; padding-top: 5px;">No 밀가루! 초간편 한끼 &lt;떠먹는 영국식 미트파이&gt;</td>
 						                      </tr>
 						                      <tr style="height: 32px;">
-						                        <td class="u-table-cell u-table-valign-top"><li>영국식 미트파이</li></td>
+						                        <td class="u-table-cell u-table-valign-top">영국식 미트파이</td>
 						                      </tr>
 						                      <tr style="height: 25px;">
-						                        <td class="u-table-cell u-table-valign-bottom u-table-cell-39" style="font-size: 16px; font-weight: 500; padding: 0px 10px; font-weight: 700; color: gray;" :key="vo.ph_price">{{vo.ph_price | comma}}원 결제 완료</td>
+						                        <td class="u-table-cell u-table-valign-bottom u-table-cell-39" style="font-size: 16px; font-weight: 500; padding: 0px 10px; font-weight: 700; color: gray;">40,000원 결제 완료</td>
 						                      </tr>
 						                      <tr style="height: 26px;">
-						                        <td class="u-table-cell u-table-valign-top u-text-palette-2-base u-table-cell-41" style="font-size: 14px; font-weight: 700; color: #db545a; padding: 3px 10px 15px 10px;">선물 예상 전달일 {{vo.dbday}}</td>
+						                        <td class="u-table-cell u-table-valign-top u-text-palette-2-base u-table-cell-41" style="font-size: 14px; font-weight: 700; color: #db545a; padding: 3px 10px 15px 10px;">선물 예상 전달일 2022.10.30</td>
 						                      </tr>
 						                    </tbody>
 						                  </table>
@@ -419,22 +405,23 @@ a.u-button-style:hover > .u-text-hover-palette-2-base, a.u-button-style:hover > 
 			                    </tbody>
 			                  </table>
 			                  <div class="u-repeater u-repeater-1" style="margin-top: 0px; margin: 0px auto; grid-gap: 30px 20px; grid-template-columns: 33.3333% 33.3333% 33.3333%; min-height: 466px; grid-gap: 0px 0px;">
-					            <div class="u-container-style u-list-item u-repeater-item" style="width: 350px; height: auto;" v-for="vo in like_list">
+					            <div class="u-container-style u-list-item u-repeater-item" style="width: 350px; height: auto;">
 					              <div class="u-container-layout u-similar-container u-container-layout-1" style="width: 350px; height: auto;  padding: 9px 10px;">
-					                <img alt="" class="u-expanded-width u-image u-image-default u-image-1" :src="vo.img" style="object-fit: fill; height: 305px; margin: 2px 0 0;">
+					                <img alt="" class="u-expanded-width u-image u-image-default u-image-1" src="" style="object-fit: fill; height: 305px; margin: 2px 0 0;">
 					                <div class="u-clearfix u-group-elements u-group-elements-1" style="width: 100%; min-height: 23px; margin: 19px auto 0 0;">
-					                  <p class="" style="width: 100%;  margin-top: 0px; margin-bottom: 5px; font-size: 0.9rem;">&nbsp;{{vo.category}} | {{vo.id}}</p>
+					                  <p class="" style="width: 100%;  margin-top: 0px; margin-bottom: 5px; font-size: 0.9rem;">&nbsp;푸드 | park</p>
 					                </div>
-					                <h3 class="u-custom-font u-font-open-sans u-text u-text-4" style="height: 54px; width: 100%; font-size: 1.1rem; font-weight: 700; margin: 12px 180px 0 3px;">{{vo.title}}</h3>
+					                <h3 class="u-custom-font u-font-open-sans u-text u-text-4" style="height: 54px; width: 100%; font-size: 1.1rem; font-weight: 700; margin: 12px 180px 0 3px;">가나다라마바사</h3>
 					                <div style="height: 5px"></div>
 					                <div style="width: 100%" class="info">
-					                  <h3 class="u-custom-font u-font-open-sans u-text u-text-palette-2-base u-text-5" style="display: inline; margin: 0px; font-size: 1.125rem; font-weight: 700;"><div class="rate" style="display:inline;" >{{vo.rate}}</div>% &nbsp;</h3>
-					                  <h3 class="u-custom-font u-font-open-sans u-text u-text-5" style="display: inline; margin: 0px; color: black; font-weight: 500; font-size: 1.0rem;" :key="vo.now_amount">{{vo.now_amount | comma}}원</h3>
-					                  <h3 class="u-custom-font u-font-open-sans u-text u-text-5" style="display: inline; margin: 0px; float: right; color: gray; font-size: 1.0rem; font-weight: 700;">{{vo.left_day}}일 남음</h3>
+					                  <h3 class="u-custom-font u-font-open-sans u-text u-text-palette-2-base u-text-5" style="display: inline; margin: 0px; font-size: 1.125rem; font-weight: 700;"><div class="rate" style="display:inline;" >100</div>% &nbsp;</h3>
+					                  <h3 class="u-custom-font u-font-open-sans u-text u-text-5" style="display: inline; margin: 0px; color: black; font-weight: 500; font-size: 1.0rem;" >1,000,000원</h3>
+					                  <h3 class="u-custom-font u-font-open-sans u-text u-text-5" style="display: inline; margin: 0px; float: right; color: gray; font-size: 1.0rem; font-weight: 700;">30일 남음</h3>
 					                </div>
 					                <div style="height: 10px;"></div>
 					                <div class="progress">
-									  <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" :style="{'width': vo.rate + '%'}">
+									  <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
+									    <span class="sr-only">70</span>
 									  </div>
 									</div>
 					              </div>
@@ -698,85 +685,26 @@ a.u-button-style:hover > .u-text-hover-palette-2-base, a.u-button-style:hover > 
     	 el:'.funding',
     	 data:{
     		 project_list:[],
-    		 paying_list:[],
-    		 payingfin_list:[],
-    		 like_list:[],
-    		 project_detail:{},
     		 user_no:${user_no},
     		 curpage:1,
-    		 totalpage:0,
-    		 count:0
+    		 totalpage:0
     	 },
     	 mounted:function(){
-    		 this.send();
-    		 this.send2();
-    		 this.send3();
-    		 this.send4();
-    	 },
-    	 methods:{
-    		 send:function(){
-    			 let _this=this;
-        		 axios.get("http://localhost:8080/web/mypage/project.do",{
-        			 params:{
-        				 page:_this.curpage,
-        				 user_no:_this.user_no
-        			 }
-        		 }).then(function(result){
-        			 _this.project_list=result.data;
-        			 _this.curpage=result.data[0].curpage;
-        			 _this.totalpage=result.data[0].totalpage;
-        			 _this.count=result.data[0].count;
-        			 console.log(result.data);
-        		 }) 
-    		 },
-    		 send2:function(){
-    			let _this=this;
-    			axios.get("http://localhost:8080/web/mypage/paying.do",{
-    				params:{
-    					user_no:_this.user_no
-    				}
-    			}).then(function(result){
-    				_this.paying_list=result.data;
-    				_this.count=result.data[0].count;
-    				console.log(result.data);
-    			})
-    		 },
-    		 send3:function(){
-    			let _this=this;
-    			axios.get("http://localhost:8080/web/mypage/payingfin.do",{
-    				params:{
-    					user_no:_this.user_no
-    				}
-    			}).then(function(result){
-    				_this.payingfin_list=result.data;
-    				_this.count=result.data[0].count;
-    				console.log(result.data);
-    			})
-    		 },
-    		 send4:function(){
-    			let _this=this;
-    			axios.get("http://localhost:8080/web/mypage/like.do",{
-    				params:{
-    					user_no:_this.user_no
-    				}
-    			}).then(function(result){
-    				_this.like_list=result.data;
-    				console.log(result.data);
-    			})
-    		 },
-    		 prev:function(){
- 				this.curpage=this.curpage>1 ? this.curpage-1:this.curpage;
- 				this.send();
- 			},
- 			next:function(){
- 				this.curpage=this.curpage<this.totalpage ? this.curpage+1:this.curpage;
- 				this.send(); 
- 			}
-    	 },
-    	 filters:{
-    		 comma(val){
-    			 return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-    		 }
+	    		 let _this=this;
+	    		 axios.get("http://localhost:8080/web/mypage/project.do",{
+	    			 params:{
+	    				 user_no:_this.user_no
+	    			 }
+	    		 }).then(function(result){
+	    			 console.log(result)
+	    			 _this.project_list=result.data;
+	    			 _this.curpage=result.data[0].curpage;
+	    			 _this.totalpage=result.data[0].totalpage;
+	    			 console.log(_this.project_list);
+	    			 console.log(result.data[4]);
+	    			 console.log(_this.project_list[0]);
+	    		 })
+	    	 
     	 }
      }) 
     </script>

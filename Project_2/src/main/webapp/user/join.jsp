@@ -15,50 +15,38 @@
 <script>
 	//비밀번호 보이기
 	$(function() {
-		//눈표시 클릭 시 pwd 보이기
-		$('#eye_i').on('click', function() {
-			$('#eye').toggleClass('active');
-
-			if ($('#eye').hasClass('active')) {
-				$('#eye').attr('type', "text");
-			} else {
-				$('#eye').attr('type', "password");
-			}
-		});
 
 		//아이디 중복체크
-
-		$('#input_email').focusout(function() {
-			let input_email = $('#input_email').val();
-			if (input_email.trim() == "") {
-				$("#input_email").focus();
-				$('#checkEmail').text("이메일을 입력하세요");
-				$('#checkEmail').css("color", "red");
+		$('#input_id').focusout(function() {
+			let input_id = $('#input_id').val();
+			if (input_id.trim() == "") {
+				$("#input_id").focus();
+				$('#checkId').text("아이디를 입력하세요");
+				$('#checkId').css("color", "red");
 				return;
 			}
 
 			$.ajax({
 				type : 'post',
-				url : '../account/email_check.do',
+				url : '../user/id_check.do',
 				data : {
-					"email" : input_email
+					"id" : input_id
 				},
 				success : function(result) {
-					let count = parseInt(result.trim());
-					if (count == 0) {
-						$('#checkEmail').text("사용가능한 이메일입니다");
-						$('#checkEmail').css("color", "blue");
-						//$('#input_email').attr('readonly', true);
+					let res=result.trim();
+					if (res==='YES') {
+						$('#checkId').text("사용가능한 아이디입니다");
+						$('#checkId').css("color", "blue");
 					} else {
-						$('#checkEmail').text("사용중인 이메일입니다");
-						$('#checkEmail').css("color", "red");
-						$('#input_email').val("");
-						$('#input_email').focus();
+						$('#checkId').text("사용중인 아이디입니다");
+						$('#checkId').css("color", "red");
+						$('#input_id').val("");
+						$('#input_id').focus();
 					}
 				}
 			})
 		});
-
+		
 		//전화번호 중복체크
 		$('#input_tel').focusout(function() {
 			let input_tel = $('#input_tel').val();
@@ -71,22 +59,27 @@
 
 			$.ajax({
 				type : 'post',
-				url : '../account/tel_check.do',
+				url : '../user/tel_check.do',
 				data : {
 					"tel" : input_tel
 				},
 				success : function(result) {
-					let count = parseInt(result.trim());
-					if (count == 0) {
+					let res=result.trim();
+					if (res==='YES') {
 						$('#checkTel').text("사용가능한 핸드폰번호입니다");
-						// $('#input_tel').attr('readonly', true);
 						$('#checkTel').css("color", "blue");
-					} else {
+					} else if (res==='NO'){
 						$('#checkTel').text("사용중인 핸드폰번호입니다");
 						$('#checkTel').css("color", "red");
 						$('#input_tel').val("");
 						$('#input_tel').focus();
+					} else if (res==='NO2'){
+						$('#checkTel').text(" - 를 포함해 작성해주세요");
+						$('#checkTel').css("color", "red");
+						$('#input_tel').val("");
+						$('#input_tel').focus();
 					}
+					
 				}
 			})
 		})
@@ -163,18 +156,17 @@ function kakaoLogout() {
 		<div class="join_container">
 			<div class="join_title">
 				<div class="joinmember">JOIN MEMBER</div>
-				<div class="join_logo">FUNDABLE</div>
+				<div class="join_logo" style="font-size: 18px;">FUNDABLE</div>
 			</div>
 
-			<form method="post" action="" name="join_frm" id="join_frm">
+			<form method="post" action="../user/join_ok.do" name="join_frm" id="join_frm">
 				<div class="join_input">
 					<p>
 						<label class="join_label">아이디</label>
 					</p>
-					<input type="text" placeholder="아이디" id="input_id"
-						name="id">
-					<!-- 이메일 중복 체크  -->
-					<font id="checkEmail" size="2"></font>
+					<input type="text" placeholder="아이디" id="input_id" name="id">
+					<!-- 아이디 중복 체크  -->
+					<font id="checkId" size="2" style="display: block; margin: 10px;"></font>
 
 					<p>
 						<label class="join_label">비밀번호</label>
@@ -183,18 +175,21 @@ function kakaoLogout() {
 					<div class="pwd_eye">
 						<input class="eye" type="password"
 							placeholder="비밀번호 (영문, 숫자, 특수문자 조합 최소 8자)" id="eye" name="pwd">
-						<div>
-							<img class="eye_i" src="../images/eye.png" alt="" id="eye_i">
-						</div>
 					</div>
-
+					
 					<p>
 						<label class="join_label">이름</label>
 					</p>
 					<input type="text" placeholder="ex)홍길동" name="name">
 
-					<!-- 이메일 중복 체크  -->
-					<font id="checkTel" size="2"></font>
+					<p>
+						<label class="join_label">핸드폰번호</label>
+					</p>
+					<input type="text" placeholder="ex)010-0000-0000" id="input_tel"
+						name="tel">
+					<!-- 핸드폰번호 중복 체크  -->
+					<font id="checkTel" size="2" style="display: block; margin: 10px;"></font>
+
 				</div>
 				<div class="agree" id="checkbox_group">
 					<input type="checkbox" id="check_all"> <label
@@ -209,11 +204,11 @@ function kakaoLogout() {
 
 				</div>
 				<div>
-					<input class="join_submit" type="submit" value="회원가입" id="joinBtn">
+					<input class="join_submit" type="submit" value="회원가입" id="joinBtn" style="font-size: 14px;">
 				</div>
 				<div>
 					<input class="join_submit_k" onclick="kakaoLogin();" class="kakao" type="submit"
-						value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;카카오로 시작하기">
+						value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;카카오로 시작하기" style="font-size: 14px;">
 				</div>
 			</form>
 		</div>
