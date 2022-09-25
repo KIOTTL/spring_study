@@ -93,4 +93,16 @@ public class UserController {
 //		
 //		return "redirect:../main/main.do";
 //	}
+	
+//	@PostMapping("user/email_insert.do")
+//	@ResponseBody
+//	public String user_email_insert(UserVO vo, HttpSession session) {
+//		
+//		dao.userEmailInsert(vo);
+//		System.out.println("111111111111111");
+//		
+//		System.out.println(vo.getEmail());
+//		
+//		return "redirect:../main/main2.do";
+//	}
 }

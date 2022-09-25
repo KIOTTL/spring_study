@@ -11,7 +11,7 @@ public interface UserMapper {
 			+ "WHERE id=#{id}")
 	public int userIdCount(String id);
 	
-	@Select("SELECT user_no, id, pwd, admin FROM user2_2 "
+	@Select("SELECT user_no, id, pwd, email, admin FROM user2_2 "
 			+ "WHERE id=#{id}")
 	public UserVO userInfoData(String id);
 	
@@ -23,7 +23,18 @@ public interface UserMapper {
 			+ "WHERE tel=#{tel}")
 	public int userTelCount(String tel);
 	
-//	@Update("UPDATE user2_2 SET pwd=#{pwd} WHERE id=#{id}")
-//	public void userUpdate(UserVO vo);
+	@Update("UPDATE user2_2 SET email=#{email} WHERE id=#{id} ")
+	public void userEmailUpdate(UserVO vo);
+
+	@Update("UPDATE user2_2 SET tel=#{tel} WHERE id=#{id} ")
+	public void userTelUpdate(UserVO vo);
+
+	@Update("UPDATE user2_2 SET pwd=#{pwd} WHERE id=#{id} ")
+	public void userPwdUpdate(UserVO vo);
+
+	@Update("UPDATE user2_2 SET bank_name=#{bank_name}, card_number=#{card_number}, card_pwd=#{card_pwd}, bday=#{bday}, card_date=#{card_date} WHERE id=#{id} ")
+	public void userCardUpdate(UserVO vo);
+	
+	
 	
 }
