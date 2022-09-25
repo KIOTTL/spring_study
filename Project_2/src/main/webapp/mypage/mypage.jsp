@@ -71,31 +71,51 @@ p:not(.u-text-variant) {
 
 </style>
 <link rel="stylesheet" href="../css/mypage/modal2.css" media="screen">
+<script type="text/javascript" src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
-$(function(){
-	  /* $("#confirm").click(function(){
-	      modalClose(); //모달 닫기 함수 호출
-	      
-	      //컨펌 이벤트 처리
-	  }); */
-	  /* $("#modal-open").click(function(){        
-	      $("#popup").css('display','flex').hide().fadeIn();
-	      //팝업을 flex속성으로 바꿔준 후 hide()로 숨기고 다시 fadeIn()으로 효과
-	  });  */
-	  /* $("#close").click(function(){
-	      modalClose(); //모달 닫기 함수 호출
-	  }); */
-	 /*  function modalClose(){
-	      $("#popup").fadeOut(); //페이드아웃 효과
-	  } */
-	});
+ $(function(){
+	$("#u-tabs-1").tabs({
+		select:function(event, ui){
+			window.location.replace(ui.tab.hash);
+			console.log(window.location.hash)
+		}
+	})
+})
+/* $(document).ready(function(){
+	var link=document.location.href;
+	var tab=link.split('/').pop();
+	$('a[href$='+tab+']').trigger("click");
+})  */
+/* $(function(){
+	  $("ul.u-tab-list li:not("+$("ul.u-tab-item li a.active").attr("href")+")").hide()
+
+	  $("ul.u-tab-item li a").click(function(){
+	   $("ul.u-tab-item li a").removeClass("active");
+	   $(this).addClass("active");
+	   $("ul.u-tab-list li").hide();
+	   $($(this).attr("href")).show();
+	   $(window).hashchange(); 
+	           
+	   return false;
+	  });
+
+	        if (location.hash != "")
+	        {  
+	            var id = location.hash.right(1);
+	            $("ul.u-tab-item li a").removeClass("active");
+	            $("a#a"+id).addClass("active")
+	            $("ul.u-tab-list li").hide();
+	            $(location.hash).show();
+	        }
+
+	 }); */
 </script>
 </head>
 <body class="u-body u-xl-mode" data-lang="en">
     <section class="u-align-center u-clearfix u-section-1" id="sec-992d">
       <div class="u-clearfix u-sheet u-valign-middle u-sheet-1" style="margin-top: 30px;">
-        <div class="u-expanded-width u-tab-links-align-center u-tabs u-tabs-1">
+        <div class="u-expanded-width u-tab-links-align-center u-tabs u-tabs-1" id="u-tabs-1">
           <ul class="u-border-1 u-border-no-left u-border-no-right u-border-no-top u-border-palette-5-light-1 u-spacing-10 u-tab-list u-unstyled" role="tablist" style="border: none;">
             <li class="u-tab-item" role="presentation">
               <a class="active u-button-style u-tab-link u-text-active-palette-5-dark-3 u-text-hover-palette-5-dark-3 u-text-palette-5-light-1 u-tab-link-1 tab" id="link-tab-62f5" href="#tab-62f5" role="tab" aria-controls="tab-62f5" aria-selected="true">프로필</a>
@@ -376,10 +396,10 @@ $(function(){
 			                      <tr style="height: 25px;">
 			                        <td class="u-table-cell u-table-cell-17" style="font-weight: 700; font-size: 19px; padding: 20px;">등록된 배송지</td>
 			                        <td class="u-table-cell" style="text-align: right;" v-if="vo.zipcode===null">
-			                          <input type=button value="+추가" style="border: none; border-radius: 14px; padding: 7px 15px; font-size: 13px; cursor: pointer; font-weight: 600;">
+			                          <input type=button value="+추가" style="border: none; border-radius: 14px; padding: 7px 15px; font-size: 13px; cursor: pointer; font-weight: 600;" v-on:click="deliUpdate()">
 			                        </td>
 			                        <td class="u-table-cell" style="text-align: right;" v-if="vo.zipcode!=null">
-			                          <input type=button value="변경" style="border: none; border-radius: 14px; padding: 7px 15px; font-size: 13px; cursor: pointer; font-weight: 600;">
+			                          <input type=button value="변경" style="border: none; border-radius: 14px; padding: 7px 15px; font-size: 13px; cursor: pointer; font-weight: 600;" id="postBtn">
 			                        </td>
 			                      </tr>
 			                      <tr style="height: 45px;">
@@ -394,6 +414,8 @@ $(function(){
 					                    </div>
 					                    <div class="u-container-layout u-container-layout-5" style="padding: 10px 20px;" v-if="vo.zipcode!=null">
 					                      <input type=button value="×" style="float: right; border-radius: 15px; padding: 0px 10px; border: none; background-color: white; font-size: 20px; cursor: pointer;">
+					                      <input type="hidden" name="zipcode" id="zipcode">
+					                      <input type="hidden" name="addr" id="addr">
 					                      <h6 class="u-text u-text-default u-text-3" style="font-weight: 600; font-size: 19px;">{{vo.name}}</h6>
 					                      <h6 class="u-text u-text-default u-text-4" style="font-size: 16px;">[{{vo.zipcode}}] {{vo.addr}}</h6>
 					                      <h6 class="u-text u-text-default u-text-5" style="font-size: 16px;">{{vo.tel}}</h6>
@@ -852,7 +874,8 @@ $(function(){
     		tel1:'', tel2:'', tel3:'',
     		nowpwd:'', pwd:'',
     		res:'',
-    		bank_name:'', cn1:'', cn2:'', cn3:'', cn4:'', card_date:'', card_pwd:'', bday:''
+    		bank_name:'', cn1:'', cn2:'', cn3:'', cn4:'', card_date:'', card_pwd:'', bday:'',
+    		zipcode:'', addr:''
     	},
     	mounted:function(){
     		let _this=this;
@@ -1019,6 +1042,26 @@ $(function(){
     			}).then(function(result){
     				location.href="../mypage/mypage.do"
     			})
+    		},
+    		deliUpdate:function(){
+    			let _this=this;
+    			new daum.Postcode({
+    				oncomplete:function(data)
+    				{	
+    					console.log(data);
+    					axios.get("http://localhost:8080/web/user/deli_update.do",{
+    						params:{
+		    					zipcode:data.zonecode,
+		    					addr:data.address,
+		    					id:'${id}'
+    						}
+    					}).then(function(result){
+    						location.href="../mypage/mypage.do"
+    					})
+    					/* $('#zipcode').val(data.zonecode)
+    					$('#addr').val(data.address) */
+    				}
+    			}).open()
     		}
     	}
       })

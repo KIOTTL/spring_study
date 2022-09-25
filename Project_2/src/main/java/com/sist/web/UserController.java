@@ -105,4 +105,5 @@ public class UserController {
 //		
 //		return "redirect:../main/main2.do";
 //	}
+	
 }

@@ -89,4 +89,13 @@ public class UserRestController {
 		return "OK";
 	}
 	
+	@GetMapping(value = "user/deli_update.do", produces = "text/plain;charset=utf-8")
+	public String user_deli_update(UserVO vo) {
+		String result="";
+		
+		dao.userDeliUpdate(vo);
+		
+		return "OK";
+	}
+	
 }

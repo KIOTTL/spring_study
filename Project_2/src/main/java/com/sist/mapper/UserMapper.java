@@ -32,9 +32,12 @@ public interface UserMapper {
 	@Update("UPDATE user2_2 SET pwd=#{pwd} WHERE id=#{id} ")
 	public void userPwdUpdate(UserVO vo);
 
-	@Update("UPDATE user2_2 SET bank_name=#{bank_name}, card_number=#{card_number}, card_pwd=#{card_pwd}, bday=#{bday}, card_date=#{card_date} WHERE id=#{id} ")
+	@Update("UPDATE user2_2 SET bank_name=#{bank_name}, card_number=#{card_number}, card_pwd=#{card_pwd}, bday=#{bday}, card_date=#{card_date} "
+			+ "WHERE id=#{id} ")
 	public void userCardUpdate(UserVO vo);
 	
+	@Update("UPDATE user2_2 set zipcode=#{zipcode}, addr=#{addr} WHERE id=#{id}")
+	public void userDeliUpdate(UserVO vo);
 	
 	
 }

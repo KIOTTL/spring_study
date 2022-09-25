@@ -84,4 +84,8 @@ public class UserDAO {
 	public void userCardUpdate(UserVO vo) {
 		mapper.userCardUpdate(vo);
 	}
+	
+	public void userDeliUpdate(UserVO vo) {
+		mapper.userDeliUpdate(vo);
+	}
 }
