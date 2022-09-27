@@ -315,12 +315,13 @@ p:not(.u-text-variant) {
 					                          <td rowspan="2" style="width: 230px; padding-top: 0px;" >
 					                            <img :src="'../mypage/images/'+vo.bank_name+'.png'" style="width:200px;">
 					                          </td>
-					                          <td>
-					                            <h6 class="u-text u-text-default u-text-1" style="display: inline;">{{vo.bank_name}}</h6>
+					                          <td style="vertical-align: bottom; font-weight: 700; font-size: 18px;">
+					                            <span class="u-text u-text-default u-text-1" style="display: inline;">{{vo.bank_name}}</span>
+					                            <span style="background-color: #db545a; color: white; font-size: 14px; padding: 3px 5px; margin: 3px;">기본</span>
 					                          </td>
 					                        </tr>
-					                          <td>
-					                            <h6 class="u-text u-text-default u-text-2" style="margin-top:0px; margin-bottom:0px;">{{vo.card_number}} / {{vo.name}} </h6>
+					                          <td style="vertical-align: text-top;">
+					                            <span class="u-text u-text-default u-text-2" style="margin-top:0px; margin-bottom:0px;">{{vo.card_number}} / {{vo.name}} </span>
 					                          </td>
 					                        <tr>
 					                        </tr>
@@ -356,10 +357,10 @@ p:not(.u-text-variant) {
 									            </p>
 									            <p> 카드 번호 </p>
 									            <p style="margin-top: 0px; margin-bottom: 0px;"> 
-									              <input type="text" v-model="cn1" ref="cn1" style="width: 22%;">-
-									              <input type="text" v-model="cn2" ref="cn2" style="width: 22%;">-
-									              <input type="text" v-model="cn3" ref="cn3" style="width: 22%;">-
-									              <input type="text" v-model="cn4" ref="cn4" style="width: 22%;">
+									              <input type="text" v-model="cn1" ref="cn1" maxlength='4' style="width: 22%;">-
+									              <input type="password" v-model="cn2" ref="cn2" maxlength='4' style="width: 22%;">-
+									              <input type="password" v-model="cn3" ref="cn3" maxlength='4' style="width: 22%;">-
+									              <input type="text" v-model="cn4" ref="cn4" maxlength='4' style="width: 22%;">
 									            </p>
 									            <p> 카드 유효기간 </p>
 									            <p style="margin-top: 0px; margin-bottom: 0px;"> 
@@ -414,12 +415,12 @@ p:not(.u-text-variant) {
 					                      	</span>
 					                    </div>
 					                    <div class="u-container-layout u-container-layout-5" style="padding: 10px 20px;" v-if="vo.zipcode!=null">
-					                      <input type=button value="×" style="float: right; border-radius: 15px; padding: 0px 10px; border: none; background-color: white; font-size: 20px; cursor: pointer;">
+					                      <input type=button value="×" style="float: right; border-radius: 15px; padding: 0px 10px; border: none; background-color: white; font-size: 20px; cursor: pointer;" v-on:click="deliDelete()">
 					                      <input type="hidden" name="zipcode" id="zipcode">
 					                      <input type="hidden" name="addr" id="addr">
-					                      <h6 class="u-text u-text-default u-text-3" style="font-weight: 600; font-size: 19px;">{{vo.name}}</h6>
-					                      <h6 class="u-text u-text-default u-text-4" style="font-size: 16px;">[{{vo.zipcode}}] {{vo.addr}}</h6>
-					                      <h6 class="u-text u-text-default u-text-5" style="font-size: 16px;">{{vo.tel}}</h6>
+					                      <span class="u-text u-text-default u-text-3" style="font-weight: 700; font-size: 19px; margin: 10px 10px 15px 10px;">{{vo.name}}<span style="background-color: #db545a; color: white; font-size: 14px; padding: 3px 5px; margin: 10px;">기본</span></span>
+					                      <span class="u-text u-text-default u-text-4" style="font-size: 16px; margin: 10px 10px 5px 10px;">[{{vo.zipcode}}] {{vo.addr}}</span>
+					                      <span class="u-text u-text-default u-text-5" style="font-size: 16px; margin: 0px 10px 10px 10px;">{{vo.tel}}</span>
 					                    </div>
 					                  </div>
 			                        </td>
@@ -533,7 +534,7 @@ p:not(.u-text-variant) {
 						                        <td class="u-table-cell u-table-cell-25" style="font-size: 18px; font-weight: 700; padding-top: 5px;">{{vo.title}}</td>
 						                      </tr>
 						                      <tr style="height: 28px;">
-						                        <td class="u-table-cell u-table-valign-top"><li>영국식 미트파이</li></td>
+						                        <td class="u-table-cell u-table-valign-top"><li>{{vo.title}}</li></td>
 						                      </tr>
 						                      <tr style="height: 27px;">
 						                        <td class="u-table-cell u-table-valign-bottom u-table-cell-29" style="font-size: 16px; font-weight: 500; padding: 0px 10px; font-weight: 700; color: gray;" :key="vo.ph_price">{{vo.ph_price | comma}}원 결제 예약</td>
@@ -577,7 +578,7 @@ p:not(.u-text-variant) {
 						                        <td class="u-table-cell u-table-cell-35" style="font-size: 18px; font-weight: 700; padding-top: 5px;">{{vo.title}}</td>
 						                      </tr>
 						                      <tr style="height: 32px;">
-						                        <td class="u-table-cell u-table-valign-top"><li>영국식 미트파이</li></td>
+						                        <td class="u-table-cell u-table-valign-top"><li>{{vo.title}}</li></td>
 						                      </tr>
 						                      <tr style="height: 25px;">
 						                        <td class="u-table-cell u-table-valign-bottom u-table-cell-39" style="font-size: 16px; font-weight: 500; padding: 0px 10px; font-weight: 700; color: gray;" :key="vo.ph_price">{{vo.ph_price | comma}}원 결제 완료</td>
@@ -875,7 +876,7 @@ p:not(.u-text-variant) {
     		tel1:'', tel2:'', tel3:'',
     		nowpwd:'', pwd:'',
     		res:'',
-    		bank_name:'', cn1:'', cn2:'', cn3:'', cn4:'', card_date:'', card_pwd:'', bday:'',
+    		bank_name:'', cn1:'', cn2:'', cn3:'', cn4:'', card_number:'', card_date:'', card_pwd:'', bday:'',
     		zipcode:'', addr:''
     	},
     	mounted:function(){
@@ -1073,6 +1074,16 @@ p:not(.u-text-variant) {
     					$('#addr').val(data.address) */
     				}
     			}).open()
+    		},
+    		deliDelete:function(){
+    			let _this=this;
+    			axios.get("http://localhost:8080/web/user/deli_delete.do",{
+    				params:{
+    					id:'${id}'
+    				}
+    			}).then(function(result){
+    				location.href="../mypage/mypage.do"
+    			})
     		}
     	}
       })

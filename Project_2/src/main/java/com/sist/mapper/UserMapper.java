@@ -44,5 +44,8 @@ public interface UserMapper {
 	@Update("UPDATE user2_2 set zipcode=#{zipcode}, addr=#{addr} WHERE id=#{id}")
 	public void userDeliUpdate(UserVO vo);
 	
+	@Update("UPDATE user2_2 set zipcode='', addr='' WHERE id=#{id}")
+	public void userDeliDelete(UserVO vo);
+	
 	
 }

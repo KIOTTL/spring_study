@@ -107,4 +107,13 @@ public class UserRestController {
 		return "OK";
 	}
 	
+	@GetMapping(value = "user/deli_delete.do", produces = "text/plain;charset=utf-8")
+	public String user_deli_delete(UserVO vo) {
+		String result="";
+		
+		dao.userDeliDelete(vo);
+		
+		return "OK";
+	}
+	
 }

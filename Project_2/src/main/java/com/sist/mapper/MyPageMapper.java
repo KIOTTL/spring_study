@@ -38,7 +38,7 @@ public interface MyPageMapper {
 			+ "WHERE num BETWEEN #{start} AND #{end}")
 	public List<FundingGoodsVO> mypageProject(Map map);
 	
-	@Select("SELECT CEIL(COUNT (*)/10.0) FROM funding_goods2_2 "
+	@Select("SELECT CEIL(COUNT (*)/5.0) FROM funding_goods2_2 "
 			+ "WHERE user_no=#{user_no}")
 	public int mypageProjectTotalPage(int user_no);
 	

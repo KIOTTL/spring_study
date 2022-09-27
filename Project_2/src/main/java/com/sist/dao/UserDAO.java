@@ -92,4 +92,8 @@ public class UserDAO {
 	public void userDeliUpdate(UserVO vo) {
 		mapper.userDeliUpdate(vo);
 	}
+	
+	public void userDeliDelete(UserVO vo) {
+		mapper.userDeliDelete(vo);
+	}
 }
