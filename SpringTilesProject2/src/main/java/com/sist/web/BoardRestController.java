@@ -56,7 +56,7 @@ public class BoardRestController {
 		return result;
 	}
 	
-	@GetMapping(value="board/insert_vue.do", produces = "text/pain;charset=utf-8")
+	@GetMapping(value="board/insert_vue.do", produces = "text/plain;charset=utf-8")
 	public String board_insert_vue(BoardVO vo) {
 		dao.boardInsert(vo);
 		
