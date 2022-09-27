@@ -73,15 +73,16 @@ p:not(.u-text-variant) {
 <link rel="stylesheet" href="../css/mypage/modal2.css" media="screen">
 <script type="text/javascript" src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" />
 <script type="text/javascript">
- $(function(){
-	$("#u-tabs-1").tabs({
+/*  $(function(){
+	$("#tabtab").click({
+			console.log(window.location.hash)
 		select:function(event, ui){
 			window.location.replace(ui.tab.hash);
-			console.log(window.location.hash)
 		}
 	})
-})
+}) */
 /* $(document).ready(function(){
 	var link=document.location.href;
 	var tab=link.split('/').pop();
@@ -115,7 +116,7 @@ p:not(.u-text-variant) {
 <body class="u-body u-xl-mode" data-lang="en">
     <section class="u-align-center u-clearfix u-section-1" id="sec-992d">
       <div class="u-clearfix u-sheet u-valign-middle u-sheet-1" style="margin-top: 30px;">
-        <div class="u-expanded-width u-tab-links-align-center u-tabs u-tabs-1" id="u-tabs-1">
+        <div class="u-expanded-width u-tab-links-align-center u-tabs u-tabs-1">
           <ul class="u-border-1 u-border-no-left u-border-no-right u-border-no-top u-border-palette-5-light-1 u-spacing-10 u-tab-list u-unstyled" role="tablist" style="border: none;">
             <li class="u-tab-item" role="presentation">
               <a class="active u-button-style u-tab-link u-text-active-palette-5-dark-3 u-text-hover-palette-5-dark-3 u-text-palette-5-light-1 u-tab-link-1 tab" id="link-tab-62f5" href="#tab-62f5" role="tab" aria-controls="tab-62f5" aria-selected="true">프로필</a>
