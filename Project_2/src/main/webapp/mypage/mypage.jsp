@@ -309,7 +309,7 @@ p:not(.u-text-variant) {
 					                      	</span>
 					                    </div>
 					                    <div class="u-container-layout u-container-layout-3" style="padding: 10px 20px;" v-if="vo.card_number!=null">
-					                      <input type=button value="×" style="float: right; border-radius: 15px; padding: 0px 10px; border: none; background-color: white; font-size: 20px; cursor: pointer; height: 20px;">
+					                      <input type=button value="×" style="float: right; border-radius: 15px; padding: 0px 10px; border: none; background-color: white; font-size: 20px; cursor: pointer; height: 20px;" v-on:click="cardDelete()">
 					                      <table>
 					                        <tr>
 					                          <td rowspan="2" style="width: 230px; padding-top: 0px;" >
@@ -1038,6 +1038,16 @@ p:not(.u-text-variant) {
     					card_date:_this.card_date,
     					card_pwd:_this.card_pwd,
     					bday:_this.bday,
+    					id:'${id}'
+    				}
+    			}).then(function(result){
+    				location.href="../mypage/mypage.do"
+    			})
+    		},
+    		cardDelete:function(){
+    			let _this=this;
+    			axios.get("http://localhost:8080/web/user/card_delete.do",{
+    				params:{
     					id:'${id}'
     				}
     			}).then(function(result){

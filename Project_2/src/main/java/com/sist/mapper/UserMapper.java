@@ -1,5 +1,6 @@
 package com.sist.mapper;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -35,6 +36,10 @@ public interface UserMapper {
 	@Update("UPDATE user2_2 SET bank_name=#{bank_name}, card_number=#{card_number}, card_pwd=#{card_pwd}, bday=#{bday}, card_date=#{card_date} "
 			+ "WHERE id=#{id} ")
 	public void userCardUpdate(UserVO vo);
+	
+	@Update("UPDATE user2_2 SET bank_name='', card_number='', card_pwd='', bday='', card_date='' "
+			+ "WHERE id=#{id} ")
+	public void userCardDelete(UserVO vo);
 	
 	@Update("UPDATE user2_2 set zipcode=#{zipcode}, addr=#{addr} WHERE id=#{id}")
 	public void userDeliUpdate(UserVO vo);

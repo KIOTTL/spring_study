@@ -85,6 +85,10 @@ public class UserDAO {
 		mapper.userCardUpdate(vo);
 	}
 	
+	public void userCardDelete(UserVO vo) {
+		mapper.userCardDelete(vo);
+	}
+	
 	public void userDeliUpdate(UserVO vo) {
 		mapper.userDeliUpdate(vo);
 	}
